@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Last Call RP — Department of Justice</title>
+  <meta name="description" content="Official document portal for the Last Call RP Department of Justice.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Barlow+Condensed:wght@300;400;500;600&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:       #060403;
+      --bg-surface:    #0c0906;
+      --bg-card:       #161009;
+      --bg-hover:      #1e160d;
+      --border-dim:    rgba(180, 120, 40, 0.10);
+      --border-mid:    rgba(180, 120, 40, 0.22);
+      --border-accent: rgba(200, 140, 50, 0.45);
+      --gold:          #c8821a;
+      --gold-light:    #e8b86d;
+      --gold-pale:     rgba(200, 130, 26, 0.10);
+      --text-primary:  #f0e8d4;
+      --text-secondary:#b8a88a;
+      --text-muted:    #3e3428;
+      --font-display:  'Cormorant Garamond', Georgia, serif;
+      --font-ui:       'Barlow Condensed', sans-serif;
+      --font-body:     'Barlow', sans-serif;
+      --nav-h:         56px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ─────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: var(--nav-h);
+      background: rgba(6, 4, 3, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      height: 38px;
+      width: 38px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    .btn-discord-nav {
+      font-family: var(--font-ui) !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.12em !important;
+      text-transform: uppercase !important;
+      color: var(--bg-base) !important;
+      background: var(--gold) !important;
+      padding: 7px 18px !important;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background 0.2s !important;
+    }
+    .btn-discord-nav:hover { background: var(--gold-light) !important; }
+
+    /* ── HAMBURGER ───────────────────────────────────────────── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      margin-left: 0.5rem;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 100%;
+      height: 1px;
+      background: var(--text-secondary);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      transform-origin: center;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ─────────────────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: rgba(6, 4, 3, 0.98);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-mid);
+      padding: 1.5rem 1.5rem 2rem;
+      z-index: 99;
+      flex-direction: column;
+      gap: 0.25rem;
+      animation: slideDown 0.2s ease;
+    }
+    .mobile-menu.open { display: flex; }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-menu a {
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--border-dim);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-menu a:hover { color: var(--gold-light); }
+    .mobile-menu .btn-discord-mobile {
+      margin-top: 1rem;
+      text-align: center;
+      color: var(--bg-base) !important;
+      background: var(--gold);
+      padding: 12px !important;
+      border-radius: 2px;
+      border-bottom: none !important;
+      font-weight: 600 !important;
+    }
+    .mobile-menu .btn-discord-mobile:hover { background: var(--gold-light); color: var(--bg-base) !important; }
+
+    /* ── HERO ────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 110px 2rem 90px;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 70% at 50% 30%, rgba(130, 60, 8, 0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 40% at 50% 80%, rgba(80, 30, 0, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-logo-img {
+      width: clamp(180px, 28vw, 300px);
+      height: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 11vw, 130px);
+      font-weight: 700;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-sub {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold-light);
+      opacity: 0.75;
+      margin-top: 0.3em;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem auto;
+    }
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold));
+    }
+    .hero-divider::after { transform: scaleX(-1); }
+    .hero-divider-gem {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .hero-desc {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.9;
+    }
+
+    .btn-discord-hero {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg-base);
+      background: var(--gold);
+      padding: 14px 34px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      position: relative;
+      z-index: 1;
+    }
+    .btn-discord-hero:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-discord-hero svg { flex-shrink: 0; }
+
+    /* ── MAIN CONTENT WRAPPER ────────────────────────────────── */
+    .docs-outer {
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .docs-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem 7rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    /* ── SECTION HEADER ──────────────────────────────────────── */
+    .section-eyebrow {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 54px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-rule {
+      width: 48px;
+      height: 1px;
+      background: var(--border-accent);
+      margin: 1.2rem 0 2rem;
+    }
+
+    /* ── SOP CARD ────────────────────────────────────────────── */
+    .sop-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      border-left: 3px solid var(--gold);
+      border-radius: 3px;
+      padding: 2rem 2.5rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .sop-card:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-accent);
+      border-left-color: var(--gold-light);
+    }
+
+    .sop-card-body { flex: 1; min-width: 0; }
+
+    .sop-label {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .sop-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .sop-card-action { flex-shrink: 0; }
+
+    .btn-view-doc {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg-base);
+      background: var(--gold);
+      padding: 11px 24px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-view-doc:hover { background: var(--gold-light); }
+    .btn-view-doc svg { flex-shrink: 0; }
+
+    /* ── UPDATES FEED ────────────────────────────────────────── */
+    .updates-list {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border-dim);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .update-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.1rem 1.75rem;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-dim);
+      transition: background 0.15s;
+    }
+    .update-item:last-child { border-bottom: none; }
+    .update-item:hover { background: var(--bg-card); }
+
+    .update-badge {
+      flex-shrink: 0;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      background: var(--gold-pale);
+      border: 1px solid rgba(200, 130, 26, 0.25);
+      border-radius: 2px;
+      padding: 3px 10px;
+      min-width: 64px;
+      text-align: center;
+    }
+
+    .update-name {
+      flex: 1;
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .update-name-empty {
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+    }
+
+    .update-arrow {
+      flex-shrink: 0;
+      font-family: var(--font-ui);
+      font-size: 18px;
+      color: var(--text-muted);
+      transition: color 0.15s, transform 0.15s;
+    }
+    .update-item:hover .update-arrow {
+      color: var(--gold);
+      transform: translateX(3px);
+    }
+
+    .updates-empty {
+      padding: 3rem;
+      text-align: center;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── TEMPLATES GRID ──────────────────────────────────────── */
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border-dim);
+      border: 1px solid var(--border-dim);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .template-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      text-decoration: none;
+      background: var(--bg-base);
+      transition: background 0.15s;
+    }
+    .template-card:hover { background: var(--bg-card); }
+
+    .template-icon {
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--gold-pale);
+      border: 1px solid rgba(200, 130, 26, 0.18);
+      border-radius: 2px;
+      color: var(--gold);
+    }
+
+    .template-name {
+      flex: 1;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      transition: color 0.15s;
+    }
+    .template-card:hover .template-name { color: var(--text-primary); }
+
+    .templates-empty {
+      padding: 3rem;
+      text-align: center;
+      font-family: var(--font-ui);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--bg-base);
+    }
+
+    /* ── LOADING STATE ───────────────────────────────────────── */
+    .doc-loading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+      font-family: var(--font-ui);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 2rem 0;
+    }
+    .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: blink 1.4s ease-in-out infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.15; transform: scale(0.75); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── FOOTER ──────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border-dim);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .footer-text {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 720px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .hero { padding: 80px 1.5rem 60px; }
+      .docs-inner { padding: 3rem 1.5rem 5rem; gap: 3.5rem; }
+      .sop-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .sop-card-action { width: 100%; }
+      .btn-view-doc { width: 100%; justify-content: center; }
+      .update-item { padding: 1rem 1.25rem; gap: 1rem; }
+      .update-name { font-size: 17px; }
+      .templates-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="images/lastcallrp-logo.png" alt="Last Call RP">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#documents">Documents</a></li>
+    <li><a href="#updates">Directives</a></li>
+    <li><a href="#templates">Templates</a></li>
+    <li><a href="#" class="btn-discord-nav" id="discord-nav">Join Discord</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation menu">
+  <a href="#documents">Documents</a>
+  <a href="#updates">Directives</a>
+  <a href="#templates">Templates</a>
+  <a href="#" class="btn-discord-mobile" id="discord-mobile">Join Discord</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <img src="images/lastcallrp-logo.png" alt="Last Call RP" class="hero-logo-img">
+  <h1 class="hero-title">Last Call RP</h1>
+  <p class="hero-sub">— Department of Justice —</p>
+  <div class="hero-divider"><div class="hero-divider-gem"></div></div>
+  <p class="hero-desc">
+    Official documents, directives, and templates for the San Andreas court system.
+  </p>
+  <a href="#" class="btn-discord-hero" id="discord-hero">
+    <svg width="18" height="14" viewBox="0 0 71 55" fill="currentColor" aria-hidden="true">
+      <path d="M60.1 4.9A58.5 58.5 0 0 0 45.7.5a.2.2 0 0 0-.2.1 40.7 40.7 0 0 0-1.8 3.7 54 54 0 0 0-16.2 0A37.6 37.6 0 0 0 25.7.6a.2.2 0 0 0-.2-.1A58.3 58.3 0 0 0 11.1 4.9a.2.2 0 0 0-.1.1C1.6 18.7-.9 32.2.3 45.5a.2.2 0 0 0 .1.2 58.8 58.8 0 0 0 17.7 9 .2.2 0 0 0 .2-.1 42 42 0 0 0 3.6-5.9.2.2 0 0 0-.1-.3 38.7 38.7 0 0 1-5.5-2.6.2.2 0 0 1 0-.4c.4-.3.7-.6 1.1-.9a.2.2 0 0 1 .2 0c11.5 5.2 24 5.2 35.4 0a.2.2 0 0 1 .2 0c.4.3.7.6 1.1.9a.2.2 0 0 1 0 .4 36 36 0 0 1-5.5 2.6.2.2 0 0 0-.1.3 47 47 0 0 0 3.6 5.9.2.2 0 0 0 .2.1 58.7 58.7 0 0 0 17.8-9 .2.2 0 0 0 .1-.2c1.4-15.2-2.4-28.5-10-40.5a.2.2 0 0 0-.1-.1ZM23.7 37.8c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.9 7.2-6.4 7.2Zm23.7 0c-3.5 0-6.4-3.2-6.4-7.2s2.8-7.2 6.4-7.2c3.6 0 6.5 3.3 6.4 7.2 0 4-2.8 7.2-6.4 7.2Z"/>
+    </svg>
+    Join Our Discord
+  </a>
+</section>
+
+<!-- DOCUMENTS -->
+<div class="docs-outer" id="documents">
+  <div class="docs-inner" id="docs-inner">
+    <div class="doc-loading">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span>Loading documents...</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">Last Call RP</p>
+  <p class="footer-text">FiveM &bull; Los Santos &bull; Department of Justice &bull; All rights reserved</p>
+</footer>
+
+<script>
+  (() => {
+    const btn  = document.getElementById('nav-hamburger');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', false);
+      });
+    });
+  })();
+
+  (async () => {
+    let config, docs;
+
+    try {
+      const [cfgRes, docsRes] = await Promise.all([
+        fetch('config.json'),
+        fetch('documents.json'),
+      ]);
+      config = await cfgRes.json();
+      docs   = await docsRes.json();
+    } catch (e) {
+      console.error('Failed to load data', e);
+      document.getElementById('docs-inner').innerHTML =
+        '<p style="color:var(--text-muted);font-family:var(--font-ui);font-size:12px;letter-spacing:.1em;text-transform:uppercase">Could not load documents.json — run the fetch workflow first.</p>';
+      return;
+    }
+
+    document.getElementById('discord-nav').href    = config.discordUrl;
+    document.getElementById('discord-hero').href   = config.discordUrl;
+    document.getElementById('discord-mobile').href = config.discordUrl;
+
+    const container = document.getElementById('docs-inner');
+    container.innerHTML = '';
+
+    // ── SOP ──────────────────────────────────────────────────
+    if (docs.sop) {
+      const sopSection = document.createElement('section');
+      sopSection.id = 'sop';
+      sopSection.innerHTML = `
+        <p class="section-eyebrow">Primary Document</p>
+        <h2 class="section-heading">Standard Operating Procedure</h2>
+        <div class="section-rule"></div>
+        <div class="sop-card">
+          <div class="sop-card-body">
+            <p class="sop-label">SC-DOJ Official Document</p>
+            <h3 class="sop-title">${escHtml(docs.sop.name)}</h3>
+          </div>
+          <div class="sop-card-action">
+            <a href="${escHtml(docs.sop.url)}" class="btn-view-doc" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              View Document
+            </a>
+          </div>
+        </div>
+      `;
+      container.appendChild(sopSection);
+    }
+
+    // ── UPDATES ───────────────────────────────────────────────
+    const updatesSection = document.createElement('section');
+    updatesSection.id = 'updates';
+    updatesSection.innerHTML = `
+      <p class="section-eyebrow">Directives</p>
+      <h2 class="section-heading">Updates &amp; Orders</h2>
+      <div class="section-rule"></div>
+      <div class="updates-list" id="updates-list"></div>
+    `;
+    container.appendChild(updatesSection);
+
+    const updatesList = updatesSection.querySelector('#updates-list');
+
+    if (!docs.updates || docs.updates.length === 0) {
+      updatesList.innerHTML = '<div class="updates-empty">No directives on file</div>';
+    } else {
+      docs.updates.forEach(u => {
+        const a = document.createElement('a');
+        a.className  = 'update-item';
+        a.href       = u.url;
+        a.target     = '_blank';
+        a.rel        = 'noopener';
+        a.innerHTML  = `
+          <span class="update-badge">SC-DOJ ${String(u.number).padStart(3, '0')}</span>
+          ${u.displayName
+            ? `<span class="update-name">${escHtml(u.displayName)}</span>`
+            : `<span class="update-name update-name-empty">Directive ${String(u.number).padStart(3, '0')}</span>`}
+          <span class="update-arrow">→</span>
+        `;
+        updatesList.appendChild(a);
+      });
+    }
+
+    // ── TEMPLATES ─────────────────────────────────────────────
+    const templatesSection = document.createElement('section');
+    templatesSection.id = 'templates';
+    templatesSection.innerHTML = `
+      <p class="section-eyebrow">Resources</p>
+      <h2 class="section-heading">Document Templates</h2>
+      <div class="section-rule"></div>
+      <div class="templates-grid" id="templates-grid"></div>
+    `;
+    container.appendChild(templatesSection);
+
+    const grid = templatesSection.querySelector('#templates-grid');
+
+    if (!docs.templates || docs.templates.length === 0) {
+      grid.innerHTML = '<div class="templates-empty">No templates on file</div>';
+    } else {
+      docs.templates.forEach(t => {
+        const a = document.createElement('a');
+        a.className = 'template-card';
+        a.href      = t.url;
+        a.target    = '_blank';
+        a.rel       = 'noopener';
+        a.innerHTML = `
+          <div class="template-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <span class="template-name">${escHtml(t.name)}</span>
+        `;
+        grid.appendChild(a);
+      });
+    }
+
+    function escHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+  })();
+</script>
+</body>
+</html>

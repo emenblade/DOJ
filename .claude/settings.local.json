@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\emenb\\\\Documents\\\\repos\\\\lastcall-rp\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\emenb\\\\Documents\\\\repos\\\\lastcall-rp\" | Where-Object { -not $_.Name.StartsWith\\('.'\\) } | Select-Object Name, @{Name='Type';Expression={if \\($_.PSIsContainer\\) { 'Folder' } else { 'File' }}} | Format-List)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\emenb\\\\Documents\\\\repos\\\\lastcall-doj\\\\\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object FullName)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}

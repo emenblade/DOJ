@@ -1,0 +1,7 @@
+{
+  "siteTitle": "Last Call RP — Department of Justice",
+  "discordUrl": "https://discord.gg/guftqbcA9a",
+  "folderId": "1meYHcZ7z3vWZVwqlIQW2mKfw2TR1cDxZ",
+  "updatePattern": "^\\[LCRP\\]\\s+SC-DOJ\\s+(\\d{3})(.*)",
+  "sopPattern": "standard operating procedure|\\bS\\.?O\\.?P\\.?\\b"
+}
