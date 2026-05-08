@@ -660,7 +660,7 @@
     try {
       const [cfgRes, docsRes] = await Promise.all([
         fetch('config.json'),
-        fetch('documents.json'),
+        fetch('documents.json?v=' + Date.now()),
       ]);
       config = await cfgRes.json();
       docs   = await docsRes.json();
