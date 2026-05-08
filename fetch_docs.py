@@ -25,7 +25,7 @@ def list_drive_folder(folder_id, api_key):
     page_token = None
     while True:
         params = {
-            'q': f"'{folder_id}' in parents and trashed = false",
+            'q': f"'{folder_id}' in parents and trashed = false and mimeType != 'application/vnd.google-apps.folder'",
             'fields': 'nextPageToken,files(id,name,mimeType)',
             'pageSize': 1000,
             'key': api_key,
