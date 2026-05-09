@@ -1,5 +1,9 @@
 {
-  "penalCode": null,
+  "penalCode": {
+    "id": "1-yh534Ss0qCJEvYMeggGAep8PRdwI_C3ZZoKPbI77YU",
+    "name": "New Penal Code",
+    "url": "https://docs.google.com/spreadsheets/d/1-yh534Ss0qCJEvYMeggGAep8PRdwI_C3ZZoKPbI77YU/edit"
+  },
   "sop": {
     "id": "1-QWLePDePmmhKw8696B8wmB0BmiSJxHqZlVcAFC3RP8",
     "name": "Bar Procedures 2026",
@@ -114,10 +118,5 @@
       "name": "[LCRP] Witness Affidavit",
       "url": "https://docs.google.com/document/d/1Sdezu3MNE_i0nA54wL66l0sSA0cEugmZ_LmpFx_I9y0/edit"
     },
-    {
-      "id": "1-yh534Ss0qCJEvYMeggGAep8PRdwI_C3ZZoKPbI77YU",
-      "name": "New Penal Code",
-      "url": "https://docs.google.com/spreadsheets/d/1-yh534Ss0qCJEvYMeggGAep8PRdwI_C3ZZoKPbI77YU/edit"
-    }
   ]
 }
