@@ -378,6 +378,75 @@
     .btn-view-doc:hover { background: var(--gold-light); }
     .btn-view-doc svg { flex-shrink: 0; }
 
+    /* ── PENAL CODE CARD ─────────────────────────────────────── */
+    .penal-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      border-left: 3px solid var(--text-secondary);
+      border-radius: 3px;
+      padding: 2rem 2.5rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .penal-card:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-accent);
+      border-left-color: var(--text-primary);
+    }
+    .penal-card-body { flex: 1; min-width: 0; }
+    .penal-label {
+      font-family: var(--font-ui);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+    .penal-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .penal-card-action { flex-shrink: 0; }
+    .btn-view-penal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--border-accent);
+      padding: 11px 24px;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .btn-view-penal:hover {
+      background: var(--bg-hover);
+      border-color: var(--text-secondary);
+    }
+    .btn-view-penal svg { flex-shrink: 0; }
+    @media (max-width: 720px) {
+      .penal-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+      }
+      .penal-card-action { width: 100%; }
+      .btn-view-penal { width: 100%; justify-content: center; }
+    }
+
     /* ── UPDATES FEED ────────────────────────────────────────── */
     .updates-list {
       display: flex;
@@ -586,6 +655,7 @@
   </a>
   <ul class="nav-links">
     <li><a href="#documents">Documents</a></li>
+    <li><a href="#penal-code">Penal Code</a></li>
     <li><a href="#updates">Directives</a></li>
     <li><a href="#templates">Templates</a></li>
     <li><a href="#" class="btn-discord-nav" id="discord-nav">Join Discord</a></li>
@@ -598,6 +668,7 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Navigation menu">
   <a href="#documents">Documents</a>
+  <a href="#penal-code">Penal Code</a>
   <a href="#updates">Directives</a>
   <a href="#templates">Templates</a>
   <a href="#" class="btn-discord-mobile" id="discord-mobile">Join Discord</a>
@@ -704,6 +775,34 @@
         </div>
       `;
       container.appendChild(sopSection);
+    }
+
+    // ── PENAL CODE ────────────────────────────────────────────
+    if (docs.penalCode) {
+      const penalSection = document.createElement('section');
+      penalSection.id = 'penal-code';
+      penalSection.innerHTML = `
+        <p class="section-eyebrow">Reference Document</p>
+        <h2 class="section-heading">Penal Code</h2>
+        <div class="section-rule"></div>
+        <div class="penal-card">
+          <div class="penal-card-body">
+            <p class="penal-label">SC-DOJ Official Reference</p>
+            <h3 class="penal-title">${escHtml(docs.penalCode.name)}</h3>
+          </div>
+          <div class="penal-card-action">
+            <a href="${escHtml(docs.penalCode.url)}" class="btn-view-penal" target="_blank" rel="noopener">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              View Document
+            </a>
+          </div>
+        </div>
+      `;
+      container.appendChild(penalSection);
     }
 
     // ── UPDATES ───────────────────────────────────────────────

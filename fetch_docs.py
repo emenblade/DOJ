@@ -1,6 +1,7 @@
 """
 Fetches the Google Drive folder contents and categorizes documents into:
   - sop: the main Standard Operating Procedure document
+  - penalCode: the Penal Code document
   - updates: [LCRP] SC-DOJ XXX numbered directives (sorted newest first)
   - templates: everything else (sorted alphabetically)
 
@@ -49,10 +50,11 @@ def doc_url(file_id, mime_type):
     return f'https://docs.google.com/document/d/{file_id}/edit'
 
 def categorize(files, config):
-    update_re = re.compile(config.get('updatePattern', r'^\[LCRP\]\s+SC-DOJ\s+(\d{3})(.*)'), re.IGNORECASE)
-    sop_re    = re.compile(config.get('sopPattern', r'standard operating procedure|\bS\.?O\.?P\.?\b'), re.IGNORECASE)
+    update_re     = re.compile(config.get('updatePattern', r'^\[LCRP\]\s+SC-DOJ\s+(\d{3})(.*)'), re.IGNORECASE)
+    sop_re        = re.compile(config.get('sopPattern', r'standard operating procedure|\bS\.?O\.?P\.?\b'), re.IGNORECASE)
+    penal_code_re = re.compile(config.get('penalCodePattern', r'penal\s*code'), re.IGNORECASE)
 
-    result = {'sop': None, 'updates': [], 'templates': []}
+    result = {'sop': None, 'penalCode': None, 'updates': [], 'templates': []}
 
     for f in files:
         name = f['name']
@@ -69,6 +71,8 @@ def categorize(files, config):
             result['updates'].append(entry)
         elif sop_re.search(name):
             result['sop'] = entry
+        elif penal_code_re.search(name):
+            result['penalCode'] = entry
         else:
             result['templates'].append(entry)
 
@@ -93,9 +97,10 @@ def main():
     print(f'Found {len(files)} files')
 
     result = categorize(files, config)
-    print(f'  SOP:       {"found" if result["sop"] else "not found"}')
-    print(f'  Updates:   {len(result["updates"])}')
-    print(f'  Templates: {len(result["templates"])}')
+    print(f'  SOP:        {"found" if result["sop"] else "not found"}')
+    print(f'  Penal Code: {"found" if result["penalCode"] else "not found"}')
+    print(f'  Updates:    {len(result["updates"])}')
+    print(f'  Templates:  {len(result["templates"])}')
 
     with open('documents.json', 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
