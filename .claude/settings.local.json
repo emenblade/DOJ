@@ -10,7 +10,8 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "mcp__Google_Drive__get_file_metadata",
-      "mcp__Google_Drive__search_files"
+      "mcp__Google_Drive__search_files",
+      "mcp__Google_Drive__read_file_content"
     ]
   }
 }
